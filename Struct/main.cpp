@@ -4,6 +4,7 @@
 #include <queue>
 #include <cstdlib>
 #include <ctime>
+#include "menu.h"
 using namespace std;
 
 struct Lvl {
@@ -14,14 +15,41 @@ struct Lvl {
 
 queue<Lvl> loadLevels();
 
+void ejemplo1() {
+    cout << "ejemplo 1";
+}
+
+void ejemplo2() {
+    cout << "ejemplo 2";
+}
+
+void ejemplo3() {
+    cout << "ejemplo 3";
+}
+
 int main() {
+
+    vector<MenuFunction> funcionesDelMenu
+    {
+        {"Ejm 1", &ejemplo1},
+        {"Ejm 2", &ejemplo2},
+        {"Ejm 3", &ejemplo3},
+    };
+    
+    MainMenu menu{ "Titulo", funcionesDelMenu };
+
+    menu.run();
+
+    /*
+
     queue<Lvl> colaxd = loadLevels();
 
     while (!colaxd.empty()) {
         colaxd.front().print();
         colaxd.pop();
     }
-    
+
+    */
 
     return 0;
 }
