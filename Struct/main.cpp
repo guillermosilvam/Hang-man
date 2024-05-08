@@ -15,28 +15,29 @@ struct Lvl {
 
 queue<Lvl> loadLevels();
 
-void ejemplo1() {
-    cout << "ejemplo 1";
+void printBienvenida() {
+    cout << "Hang-a-Dev es el clasico juego del ahorcado, sin embargo, con tematica basada programacion. ¡Diviertete!";
 }
 
-void ejemplo2() {
-    cout << "ejemplo 2";
+void printCreditos() {
+    cout << "Este juego fue desarrollado por:" << endl;
+    cout << "Guillermo Silva" << endl;
+    cout << "Martin Velasquez" << endl;
+    cout << "Reyna Figuera" << endl;
+    cout << "Agradecimiento especial a Daniel Ramirez, todo esto es posible gracias a el." << endl;
 }
 
-void ejemplo3() {
-    cout << "ejemplo 3";
-}
 
 int main() {
 
     vector<MenuFunction> funcionesDelMenu
     {
-        {"Ejm 1", &ejemplo1},
-        {"Ejm 2", &ejemplo2},
-        {"Ejm 3", &ejemplo3},
+        {"Jugar", &printBienvenida},
+        {"Creditos", &printCreditos},
+        
     };
     
-    MainMenu menu{ "Titulo", funcionesDelMenu };
+    MainMenu menu{ "Bienvenido a Hang-a-Dev", funcionesDelMenu };
 
     menu.run();
 
@@ -55,18 +56,6 @@ int main() {
 }
 
 
-
-void printBienvenida() {
-    cout << "Bienvenido a Hang-a-Dev" << endl;
-}
-
-void printCreditos() {
-    cout << "Este juego fue desarrollado por:" << endl;
-    cout << "Guillermo Silva" << endl;
-    cout << "Martin Velasquez" << endl;
-    cout << "Reyna Figuera" << endl;
-    cout << "Agradecimiento especial a Daniel Ramirez, todo esto es posible gracias a el." << endl;
-}
 
 void printLose() {
     cout << "Has perdido.\n ¿Desea volver a jugar?" << endl;
