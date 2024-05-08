@@ -26,6 +26,28 @@ int main() {
     return 0;
 }
 
+
+
+void printBienvenida() {
+    cout << "Bienvenido a Hang-a-Dev" << endl;
+}
+
+void printCreditos() {
+    cout << "Este juego fue desarrollado por:" << endl;
+    cout << "Guillermo Silva" << endl;
+    cout << "Martin Velasquez" << endl;
+    cout << "Reyna Figuera" << endl;
+    cout << "Agradecimiento especial a Daniel Ramirez, todo esto es posible gracias a el." << endl;
+}
+
+void printLose() {
+    cout << "Has perdido.\n ¿Desea volver a jugar?" << endl;
+}
+
+void printWin() {
+    cout << "¡Ganaste, felicidades!" << endl;
+}
+
 void Lvl::print() {
     cout << word << ":" << endl;
     cout << advice << endl;
@@ -36,11 +58,11 @@ queue<Lvl> loadLevels() {
     vector<Lvl> list;
     queue<Lvl> levelQueue;
 
-    Lvl w1 = { "Entero" , "Sirven para..." };
-    Lvl w2 = { "Vector" , ".."};
+    Lvl w1 = { "Entero" , "..." };
+    Lvl w2 = { "Vector" , "..."};
     Lvl w3 = { "Cola" , "..."};
-    Lvl w4 = { "Pila" , "...."};
-    Lvl w5 = { "Arreglo" , "....."};
+    Lvl w4 = { "Pila" , "..."};
+    Lvl w5 = { "Arreglo" , "..."};
 
     list.push_back(w1);
     list.push_back(w2);
