@@ -15,6 +15,44 @@ struct Lvl {
 
 queue<Lvl> loadLevels();
 
+string getinput() {
+    string input;
+    cin >> input;
+    
+    for (auto& letra : input) 
+        letra = tolower(letra);
+    
+    return input;
+}
+
+void playlevel(Lvl lvlactual, bool& win) {
+    for (int attemps = 0; attemps < 5; attemps++) {
+        auto input = getinput();
+
+        if (input == lvlactual.word) {
+            win = true;
+            break;
+        }
+    }
+}
+
+void play() {
+    auto niveles = loadLevels();
+    while (!niveles.empty()) {
+        bool win = false;
+        playlevel(niveles.front(), win);
+        if (win) {
+            cout << "Has completado el nivel" << endl;   
+        }
+        else {
+            cout << "Perdiste" << endl;
+            break;
+        }
+        niveles.pop();
+    }
+
+}
+
 void printBienvenida() {
     cout << "Hang-a-Dev es el clasico juego del ahorcado, sin embargo, con tematica basada programacion. ¡Diviertete!";
 }
@@ -27,12 +65,11 @@ void printCreditos() {
     cout << "Agradecimiento especial a Daniel Ramirez, todo esto es posible gracias a el." << endl;
 }
 
-
 int main() {
 
     vector<MenuFunction> funcionesDelMenu
     {
-        {"Jugar", &printBienvenida},
+        {"Jugar", &play},
         {"Creditos", &printCreditos},
         
     };
@@ -40,18 +77,6 @@ int main() {
     MainMenu menu{ "Bienvenido a Hang-a-Dev", funcionesDelMenu };
 
     menu.run();
-
-    /*
-
-    queue<Lvl> colaxd = loadLevels();
-
-    while (!colaxd.empty()) {
-        colaxd.front().print();
-        colaxd.pop();
-    }
-
-    */
-
     return 0;
 }
 
@@ -75,18 +100,19 @@ queue<Lvl> loadLevels() {
     vector<Lvl> list;
     queue<Lvl> levelQueue;
 
-    Lvl w1 = { "Entero" , "..." };
-    Lvl w2 = { "Vector" , "..."};
-    Lvl w3 = { "Cola" , "..."};
-    Lvl w4 = { "Pila" , "..."};
-    Lvl w5 = { "Arreglo" , "..."};
+    Lvl w1 = { "entero" , "..." };
+    Lvl w2 = { "vector" , "..."};
+    Lvl w3 = { "cola" , "..."};
+    Lvl w4 = { "pila" , "..."};
+    Lvl w5 = { "arreglo" , "..."};
 
+    
     list.push_back(w1);
-    list.push_back(w2);
+    /*list.push_back(w2);
     list.push_back(w3);
     list.push_back(w4);
     list.push_back(w5);
-
+    */
     
     while(!list.empty()) {
         int index = rand() % list.size();
