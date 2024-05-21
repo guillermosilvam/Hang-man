@@ -26,12 +26,35 @@ string getinput() {
 }
 
 void playlevel(Lvl lvlactual, bool& win) {
+    vector<char> Letrasdelapalabra;
+    for (auto letra : lvlactual.word) {
+        if (find(Letrasdelapalabra.begin(), Letrasdelapalabra.end(), letra ) == Letrasdelapalabra.end()) { /*Si no existe, se añade*/
+            Letrasdelapalabra.push_back(letra);
+        }    
+    }
+    vector<char> Letrasconocidas;
     for (int attemps = 0; attemps < 5; attemps++) {
+        cout << "Estas son las letras que conoces: " << endl;
+        for (auto letra : Letrasconocidas) {
+            cout << letra << " ";
+        }
+        cout << endl;
+        cout << "Ingrese una letra o palabra" << endl;
         auto input = getinput();
-
+        
         if (input == lvlactual.word) {
             win = true;
             break;
+        }
+        if (input.size() == 1) {
+            if (find(Letrasconocidas.begin(), Letrasconocidas.end(), input[0]) != Letrasconocidas.end()) { /*Si existe*/
+                attemps--;
+            } else {
+                if (find(Letrasdelapalabra.begin(), Letrasdelapalabra.end(), input[0]) != Letrasdelapalabra.end()) {
+                    Letrasconocidas.push_back(input[0]);
+                    attemps--;
+                }
+            }
         }
     }
 }
