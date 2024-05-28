@@ -5,6 +5,7 @@
 #include <cstdlib>
 #include <ctime>
 #include "menu.h"
+#include "userinput.h"
 using namespace std;
 
 struct Lvl {
@@ -25,22 +26,59 @@ string getinput() {
     return input;
 }
 
-void playlevel(Lvl lvlactual, bool& win) {
+vector<char> getLetrasDePalabra(string palabra)
+{
     vector<char> Letrasdelapalabra;
-    for (auto letra : lvlactual.word) {
-        if (find(Letrasdelapalabra.begin(), Letrasdelapalabra.end(), letra ) == Letrasdelapalabra.end()) { /*Si no existe, se añade*/
+    for (auto letra : palabra) {
+        if (find(Letrasdelapalabra.begin(), Letrasdelapalabra.end(), letra) == Letrasdelapalabra.end()) { /*Si no existe, se añade*/
             Letrasdelapalabra.push_back(letra);
-        }    
-    }
-    vector<char> Letrasconocidas;
-    for (int attemps = 0; attemps < 5; attemps++) {
-        cout << "Estas son las letras que conoces: " << endl;
-        for (auto letra : Letrasconocidas) {
-            cout << letra << " ";
         }
-        cout << endl;
+    }
+    return Letrasdelapalabra;
+}
+
+void printCoincidencia(string palabra, vector<char> Letrasconocidas)
+{
+    cout << "Estas son las coincidencias con tu palabra: " << endl;
+
+    for (auto letra : palabra)
+    {
+        if (find(Letrasconocidas.begin(), Letrasconocidas.end(), letra) != Letrasconocidas.end())
+            cout << letra;
+        else
+            cout << '_';
+    }
+
+    cout << "\n\n";
+}
+
+void printIntentosRestantes(int intentosTotales, int attemps)
+{
+    cout << "Intentos restantes: ";
+
+    for (int i = 0; i < (intentosTotales - attemps); i++)
+        cout << 'X';
+
+    cout << "\n\n";
+}
+
+void playlevel(Lvl lvlactual, bool& win) {
+    const int intentosTotales = 5;
+    auto Letrasdelapalabra = getLetrasDePalabra(lvlactual.word);
+    vector<char> Letrasconocidas;
+
+    cout << "Nuevo nivel! A continuacion su consejo:\n";
+    cout << lvlactual.advice << "\n\n";
+
+    for (int attemps = 0; attemps < intentosTotales; attemps++) {
+
+        printCoincidencia(lvlactual.word, Letrasconocidas);
+        printIntentosRestantes(intentosTotales, attemps);
+
         cout << "Ingrese una letra o palabra" << endl;
         auto input = getinput();
+    
+        cout << "\n\n";
         
         if (input == lvlactual.word) {
             win = true;
@@ -63,17 +101,21 @@ void play() {
     auto niveles = loadLevels();
     while (!niveles.empty()) {
         bool win = false;
+        clearConsole();
         playlevel(niveles.front(), win);
         if (win) {
             cout << "Has completado el nivel" << endl;   
         }
         else {
-            cout << "Perdiste" << endl;
-            break;
+            cout << "Has perdido el juego. Mala suerte!" << endl;
+            return;
         }
         niveles.pop();
     }
 
+    clearConsole();
+    cout << "Enhorabuena, has superado cada nivel!\n";
+    cout << "Muchas gracias por jugar <3\n";
 }
 
 void printBienvenida() {
@@ -94,7 +136,6 @@ int main() {
     {
         {"Jugar", &play},
         {"Creditos", &printCreditos},
-        
     };
     
     MainMenu menu{ "Bienvenido a Hang-a-Dev", funcionesDelMenu };
@@ -123,7 +164,7 @@ queue<Lvl> loadLevels() {
     vector<Lvl> list;
     queue<Lvl> levelQueue;
 
-    Lvl w1 = { "entero" , "..." };
+    Lvl w1 = { "entero" , "Es la representacion de un numero sin decimal"};
     Lvl w2 = { "vector" , "..."};
     Lvl w3 = { "cola" , "..."};
     Lvl w4 = { "pila" , "..."};
@@ -131,11 +172,10 @@ queue<Lvl> loadLevels() {
 
     
     list.push_back(w1);
-    /*list.push_back(w2);
+    list.push_back(w2);
     list.push_back(w3);
     list.push_back(w4);
     list.push_back(w5);
-    */
     
     while(!list.empty()) {
         int index = rand() % list.size();
