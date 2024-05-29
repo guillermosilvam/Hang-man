@@ -118,9 +118,6 @@ void play() {
     cout << "Muchas gracias por jugar <3\n";
 }
 
-void printBienvenida() {
-    cout << "Hang-a-Dev es el clasico juego del ahorcado, sin embargo, con tematica basada programacion. ¡Diviertete!";
-}
 
 void printCreditos() {
     cout << "Este juego fue desarrollado por:" << endl;
@@ -138,7 +135,7 @@ int main() {
         {"Creditos", &printCreditos},
     };
     
-    MainMenu menu{ "Bienvenido a Hang-a-Dev", funcionesDelMenu };
+    MainMenu menu{ "Bienvenido a Guess the Word", funcionesDelMenu };
 
     menu.run();
     return 0;
@@ -165,10 +162,10 @@ queue<Lvl> loadLevels() {
     queue<Lvl> levelQueue;
 
     Lvl w1 = { "entero" , "Es la representacion de un numero sin decimal"};
-    Lvl w2 = { "vector" , "..."};
-    Lvl w3 = { "cola" , "..."};
-    Lvl w4 = { "pila" , "..."};
-    Lvl w5 = { "arreglo" , "..."};
+    Lvl w2 = { "vector" , "Funciona como arreglo dinamico. Es una de las multiples estructuras llamadas contenedores"};
+    Lvl w3 = { "cola" , "Caracterizada por ser una secuencia de elementos. Primer elemento en entrar sera tambien el primero en salir."};
+    Lvl w4 = { "pila" , "Permite almacenar y recuperar datos, siendo el modo de acceso a sus elementos de tipo, ultimo en entrar, primero en salir."};
+    Lvl w5 = { "arreglo" , "Son estructuras de datos que permiten almacenar un conjunto de elementos relacionados bajo un solo nombre."};
 
     
     list.push_back(w1);
